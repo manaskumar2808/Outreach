@@ -9,14 +9,11 @@ from rest_framework.generics import (
     RetrieveDestroyAPIView,
 )
 
-from rest_framework.permissions import (
-    IsAuthenticated,
-    AllowAny,
-)
 
 class FeedListAPIView(ListAPIView):
     queryset = Feed.objects.all().order_by('-timestamp')
     serializer_class = FeedSerializer
+
 
 class UserFeedListAPIView(ListAPIView):
     serializer_class = FeedSerializer
@@ -25,6 +22,7 @@ class UserFeedListAPIView(ListAPIView):
         user = self.kwargs['user']
         queryset = Feed.objects.filter(creator__user=user).order_by('-timestamp')
         return queryset
+        
     
 class FeedRetrieveAPIView(RetrieveAPIView):
     queryset = Feed.objects.all()
@@ -47,4 +45,4 @@ class FeedUpdateAPIView(RetrieveUpdateAPIView):
 class FeedDeleteAPIView(RetrieveDestroyAPIView):
     queryset = Feed.objects.all()
     serializer_class = FeedSerializer
-    lookup_field = 'id'
+    lookup_field = 'id' 

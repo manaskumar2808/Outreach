@@ -13,6 +13,7 @@ class FeedSerializer(serializers.ModelSerializer):
     def create(self,validated_data):
         title = validated_data['title']
         content = validated_data['content']
+        image = validated_data['image']
         imageUrl = validated_data['imageUrl']
         videoUrl = validated_data['videoUrl']
         creator_data = validated_data['creator']
@@ -22,6 +23,7 @@ class FeedSerializer(serializers.ModelSerializer):
         feed = Feed(
             title=title,
             content=content,
+            image=image,
             imageUrl=imageUrl,
             videoUrl=videoUrl,
             creator=creator,
